@@ -16,33 +16,47 @@ map<string, map<string, string>> dict;
   }
 */
 
-pair<string, string> findSaveReplace(const string& _input) {
+string findSaveReplace(const string& _input) {
     regex str_expr(".*text=\"(.*)\".*");
+    regex replc_expr("text=\"(.*)\"");
+    try {
+        if (regex_match(_input, str_expr)) {
+            smatch m;
+            if (regex_search(_input, m, str_expr) == false) {
+                return "";
+            }
+            string en(m[1].str());
+            regex str1_expr(en);
+            cout << "En=" << en << endl;
 
-    if (regex_match(_input, str_expr)) {
-        smatch m;
-        regex_search(_input, m, str_expr);
-        string en(m[1].str());
-        regex str1_expr(en);
-        cout << "En=" << en << endl;
+            string tag;
+            cout << "Enter tag=";
+            getline(cin, tag);
 
-        string tag;
-        cout << "Enter tag=";
-        getline(cin, tag);
+            string ru;
+            if (dict.find(tag) != dict.end()) {
+                ru = dict[tag]["ru"];
+                cout << "Exits: " << ru;
+            } else {
+                cout << "Enter ru=";
+                getline(cin, ru);
+            }
 
-        string ru;
-        cout << "Enter ru=";
-        getline(cin, ru);
+            string res = regex_replace(_input, replc_expr, "text={i18n."s + tag + ".ru}"s);
+            cout << "res=" << res << endl;
+            // fix it
+            dict[tag];
+            dict[tag]["ru"s] = ru;
+            dict[tag]["en"s] = en;
 
-        string res = regex_replace(_input, str1_expr, "i18n."s + tag + ".ru");
-        // fix it
-        dict[tag];
-        dict[tag]["ru"s] = ru;
-        dict[tag]["en"s] = en;
-
-        return {res, en};
+            return res;
+        }
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << '\n'
+                  << _input << endl;
     }
-    return {""s, ""s};
+
+    return "";
 }
 
 int main(int args, char* argv[]) {
@@ -57,13 +71,12 @@ int main(int args, char* argv[]) {
     if (input) {
         string line;
         while (getline(input, line)) {
-            pair<string, string> res = findSaveReplace(line);
-            if (res.first != "") {
-                output << res.first << endl;
+            if (line.find("text") != std::string::npos) {
+                string res = findSaveReplace(line);
+                output << res << endl;
                 cout << "-------------" << endl;
-            } else {
+            } else
                 output << line << endl;
-            }
         }
     } else {
         cout << "error!" << endl;

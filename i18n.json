@@ -1,9 +1,46 @@
 {
-  "langcode": "en",
   "i18n": {
-    "tagsWasNotFound": {
+    "tagsWNF": {
       "ru": "Теги не были обнаружены...",
       "en": "Tags was not found..."
+    },
+    "cdAlgDNE": {
+      "ru": "Алгоритмы обнаружения скопления людей не найдены...",
+      "en": "CrowdDetector algorithms does not exist..."
+    },
+    "chooseArea": { "ru": "Выберите область...", "en": "Choose area..." },
+    "error": { "ru": "Ошибка...", "en": "Error..." },
+    "hdAlgDNE": {
+      "ru": "Алгоритмы обнаружения головы не найдены...",
+      "en": "HeadDetector algorithms does not exist..."
+    },
+    "hmAlgDNE": {
+      "ru": "Алгоритмы построения тепловой карты не найдены...",
+      "en": "HeatMap algorithms does not exist..."
+    },
+    "lcdAlgDNE": {
+      "ru": "Алгоритмы обнаружения пересечения линий не найдены...",
+      "en": "LineCrossingDetector algorithms does not exist..."
+    },
+    "whatAreWeGoingToRecognizeToday": {
+      "ru": "Что мы узнаем сегодня?",
+      "en": "What are we going to recognise today?"
+    },
+    "signIn": {
+      "ru": "Войти",
+      "en": "Sign in"
+    },
+    "username": {
+      "ru": "Пользователь",
+      "en": "Username"
+    },
+    "password": {
+      "ru": "Пароль",
+      "en": "password"
+    },
+    "signInU": {
+      "ru": "ВОЙТИ",
+      "en": "SIGN IN"
     }
   }
 }
