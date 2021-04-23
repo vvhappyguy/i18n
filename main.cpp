@@ -22,16 +22,25 @@ pair<string, string> findSaveReplace(const string& _input) {
     if (regex_match(_input, str_expr)) {
         smatch m;
         regex_search(_input, m, str_expr);
-        regex str1_expr(m[1].str());
-        cout << "Matched: " << m[1].str() << endl;
+        string en(m[1].str());
+        regex str1_expr(en);
+        cout << "En=" << en << endl;
 
-        string tmp;
-        cout << "Enter tmp=";
-        getline(cin, tmp);
+        string tag;
+        cout << "Enter tag=";
+        getline(cin, tag);
 
-        string res = regex_replace(_input, str1_expr, tmp);
-        //cout << res;
-        return {res, m[1].str()};
+        string ru;
+        cout << "Enter ru=";
+        getline(cin, ru);
+
+        string res = regex_replace(_input, str1_expr, "i18n."s + tag + ".ru");
+        // fix it
+        dict[tag];
+        dict[tag]["ru"s] = ru;
+        dict[tag]["en"s] = en;
+
+        return {res, en};
     }
     return {""s, ""s};
 }
@@ -44,13 +53,12 @@ int main(int args, char* argv[]) {
     }
 
     ifstream input(argv[1]);
-    ofstream output(argv[1] + "_new.txt"s, ios::trunc);
+    ofstream output(argv[1] + "_new.jsx"s, ios::trunc);
     if (input) {
         string line;
         while (getline(input, line)) {
             pair<string, string> res = findSaveReplace(line);
             if (res.first != "") {
-                cout << res.second << endl;
                 output << res.first << endl;
                 cout << "-------------" << endl;
             } else {
@@ -61,6 +69,23 @@ int main(int args, char* argv[]) {
         cout << "error!" << endl;
     }
     input.close();
+
+    if (args > 2 && argv[2] == "json"s) {
+        for (auto elem : dict) {
+            cout << "\"" << elem.first << "\":{"
+                 << "\"ru\":\"" << elem.second["ru"] << "\",";
+            cout << "\"en\":\"" << elem.second["en"] << "\"},";
+            cout << endl;
+        }
+    } else {
+        for (auto elem : dict) {
+            cout << elem.first << endl;
+            cout << "\tru: " << elem.second["ru"] << endl;
+            cout << "\ten: " << elem.second["en"] << endl;
+            cout << endl;
+        }
+    }
+
     cout << endl
          << "End!" << endl;
     return 0;
