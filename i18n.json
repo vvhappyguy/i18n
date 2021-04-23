@@ -1,0 +1,9 @@
+{
+  "langcode": "en",
+  "i18n": {
+    "tagsWasNotFound": {
+      "ru": "Теги не были обнаружены...",
+      "en": "Tags was not found..."
+    }
+  }
+}
