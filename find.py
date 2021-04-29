@@ -17,7 +17,6 @@ def grep(word, path):
     print(word)
     proc = subprocess.Popen('bash', stdin = subprocess.PIPE, stdout = subprocess.PIPE)
     stdout, stderr = proc.communicate(bytes(cmd, 'utf-8'))
-    # a = os.system(cmd) 
     print(stdout)
     if(len(stdout) == 0):
         no_words.append(word)
